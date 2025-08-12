@@ -119,7 +119,7 @@ double bsearch_3(double l, double r)
 }
 ```
 
-## 3.高精度模板
+## 3. 高精度模板
 
 ```cpp
 // C = A + B, A >= 0, B >= 0
@@ -189,5 +189,38 @@ vector<int> div(vector<int> &A, int b, int &r)
     return C;
 }
 
+```
+
+## 4. 前缀和模板
+
+``` cpp
+//a代表数据 s代表前缀和数组， 下标全从1开始
+//一维前缀和 
+s[i] = s[i - 1] + a[i];	//计算前缀和
+s[l~r] = s[r] - s[l - 1] //计算区间l ~ r的和
+//二维前缀和
+s[i][j] = s[i - 1][j] + s[i][j - 1] - s[i - 1][j - 1] + a[i][j];	//计算前缀和
+//(x1, y1) 到 (x2, y2) 这个矩形的和
+x[(x1,y1)~(x2,y2)] = s[x2][y2] - s[x1 - 1][y2] - s[x2][y1 - 1] + s[x1 - 1][x2 - 1];
+```
+
+## 5. 差分模板
+
+```cpp
+//一维差分
+//在l~r区间的数加上C
+void insert(int l, int r, int c)
+{
+    d[l] += c;
+    d[r + 1] -= c;
+}
+//二维差分
+void insert(int x1, int y1, int x2, int y2, int c)
+{
+    d[x1][y1] += c;
+    d[x1][y2 + 1] -= c;
+    d[x2 + 1][y1] -= c;
+    d[x2 + 1][y2 + 1] += c;
+}
 ```
 
